@@ -71,7 +71,7 @@ instance/
 db.sqlite3
 db.sqlite3-journal
 
-# Data (храним только маленькие сэмплы)
+# Data (store small samples only)
 data/raw/
 data/interim/
 data/processed/
@@ -93,7 +93,7 @@ tmp_*/
 *.pkl
 *.joblib
 
-# BI (тяжёлые файлы)
+# BI (heavy files)
 *.pbix
 *.pbit
 *.twb
@@ -103,3 +103,6 @@ tmp_*/
 .pypirc
 .cursorignore
 .cursorindexingignore
+
+# 1. Self notes 
+NOTES.md
