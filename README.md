@@ -98,3 +98,65 @@ H4: Volume Correlation with Infrastructure Load (KPI: Scalability)
 Assertion: The general growth of electronic transactions (credit transfers, cards) in the country signals an increasing load on the bank's payment infrastructure.
 
 Simulator Test: Historical volume growth is used as the input load parameter to monitor the critical p95 Latency under growing pressure.
+
+📁 Project Structure
+project/
+├── data/
+│   ├── raw/              # original Bundesbank Excel data
+│   ├── interim/          # intermediate cleaned tables
+│   └── processed/        # final tidy-format datasets for analysis
+├── notebooks/
+│   ├── 01_data_extraction_cleaning.ipynb   # extracts tables from Excel
+│   ├── 02_data_transform_tidy.ipynb        # cleaning and transformation
+│   └── 03_data_exploration.ipynb           # data exploration and visualization (next step)
+└── README.md
+
+⚙️ Workflow Overview
+🧩 Step 1 — Data Extraction & Cleaning
+
+Open 01_data_extraction_cleaning.ipynb
+
+Load the Bundesbank Excel file (I.Payments_statistics_810262.xlsx)
+
+Read sheets table_3 (transactions) and table_4 (values)
+
+Save clean CSV files to data/interim/
+
+🧩 Step 2 — Data Transformation (Tidy Format)
+
+Open 02_data_transform_tidy.ipynb
+
+Remove helper rows ("of which", "Total")
+
+Standardize column names (2022 S1, 2022 S2 → 2022H1, 2022H2)
+
+Transform wide-format tables into tidy format using melt()
+
+Save tidy datasets to data/processed/
+
+🧩 Step 3 — Data Exploration & Visualization
+
+Open 03_data_exploration.ipynb
+
+Analyze SCT Inst growth and the decline of paper-based transfers
+
+Compare electronic vs. traditional credit transfers
+
+Produce first visualizations (line charts and trends)
+(next stage to be implemented)
+
+🧩 Version Control Workflow (Git)
+
+Below is the basic command sequence used in this project to track changes and keep the repository up to date:
+
+# 1️⃣ Check project status (see modified and untracked files)
+git status
+
+# 2️⃣ Add all new and modified files to the staging area
+git add .
+
+# 3️⃣ Commit your changes with a clear, descriptive message
+git commit -m "Stage 1: Data extraction and cleaning completed (Bundesbank payments)"
+
+# 4️⃣ Push commits to the remote GitHub repository
+git push
