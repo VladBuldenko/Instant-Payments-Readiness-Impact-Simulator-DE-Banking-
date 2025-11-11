@@ -4,3 +4,4 @@ matplotlib
 seaborn
 tabula-py
 pytest
+streamlit
