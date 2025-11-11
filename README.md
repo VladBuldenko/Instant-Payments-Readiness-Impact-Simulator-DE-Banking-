@@ -5,6 +5,41 @@ link of the data - https://www.bundesbank.de/en/statistics/banks-and-other-finan
 
 dataset - I. Payments statistics (24.07.2025)
 
+🚀 Quick Start
+Prerequisites
+
+Python 3.9–3.11
+
+pip (or pipx)
+
+macOS/Linux/Windows are all fine
+
+1) Clone & enter the project
+git clone <your_repo_url>.git
+cd Instant-Payments-Readiness-Impact-Simulator-DE-Banking-
+
+2) Create venv & activate
+python -m venv venv
+# macOS / Linux:
+source venv/bin/activate
+# Windows (PowerShell):
+# .\venv\Scripts\Activate.ps1
+
+3) Install requirements
+pip install -r requirements.txt
+# If Streamlit is not listed, also run:
+# pip install streamlit
+
+4) Run the simulator app
+# IMPORTANT: run from the project root (not from /app)
+streamlit run app/streamlit_app.py
+
+
+Open the printed URL (e.g., http://localhost:8501) in your browser.
+
+5) Run tests (optional but recommended)
+pytest -q
+
 
 1. What I am Analyzing (Contextual Analysis)
 

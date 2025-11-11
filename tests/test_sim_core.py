@@ -1,3 +1,8 @@
+# Import system libs to adjust Python path (so we can import from ../src)
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import numpy as np
 import pandas as pd
 import pytest
