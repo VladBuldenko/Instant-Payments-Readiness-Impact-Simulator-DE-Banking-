@@ -5,7 +5,6 @@ link of the data - https://www.bundesbank.de/en/statistics/banks-and-other-finan
 
 dataset - I. Payments statistics (24.07.2025)
 
-Project Scope: Instant Payments Readiness & Impact Simulator
 
 1. What I am Analyzing (Contextual Analysis)
 
