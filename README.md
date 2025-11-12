@@ -1,9 +1,16 @@
-# Instant-Payments-Readiness-Impact-Simulator-DE-Banking-
-SCT Inst readiness &amp; impact simulator: models how VoP and fraud thresholds affect payment success rate, p95 latency, and manual reviews using synthetic transactions; outputs KPIs and recommended settings.
+💶 Instant Payments Readiness & Impact Simulator (DE Banking)
 
-link of the data - https://www.bundesbank.de/en/statistics/banks-and-other-financial-corporations/payments-statistics/statistics-on-payments-and-securites-trading-clearing-and-settlement-in-germany-810330
+SCT Inst readiness simulator: explore how Verification of Payee (VoP) and Fraud Filter thresholds affect Conversion Rate, Latency p95, Manual Review Rate, and Risk Exposure.
+Combines Bundesbank payment trends (2022–2024) with a synthetic “what-if” model to recommend operating settings.
 
-dataset - I. Payments statistics (24.07.2025)
+🔗 Data Source
+
+Deutsche Bundesbank — Statistics on payments and securities trading, clearing and settlement in Germany.
+Section I. Payments statistics (24.07.2025).
+Source hub: https://www.bundesbank.de/en/statistics/banks-and-other-financial-corporations/payments-statistics/statistics-on-payments-and-securites-trading-clearing-and-settlement-in-germany-810330
+
+Note: Bundesbank data validates market trends (SCT Inst growth, credit transfers, cards, etc.).
+It does not contain VoP/Fraud fields — the simulator uses synthetic transactions for scenario testing.
 
 🚀 Quick Start
 Prerequisites
@@ -12,23 +19,22 @@ Python 3.9–3.11
 
 pip (or pipx)
 
-macOS/Linux/Windows are all fine
+macOS / Linux / Windows
 
 1) Clone & enter the project
 git clone <your_repo_url>.git
 cd Instant-Payments-Readiness-Impact-Simulator-DE-Banking-
 
-2) Create venv & activate
+2) Create & activate a virtual environment
 python -m venv venv
-# macOS / Linux:
+# macOS / Linux
 source venv/bin/activate
-# Windows (PowerShell):
+# Windows (PowerShell)
 # .\venv\Scripts\Activate.ps1
 
-3) Install requirements
+3) Install dependencies
 pip install -r requirements.txt
-# If Streamlit is not listed, also run:
-# pip install streamlit
+# (If needed) pip install streamlit
 
 4) Run the simulator app
 # IMPORTANT: run from the project root (not from /app)
@@ -37,160 +43,181 @@ streamlit run app/streamlit_app.py
 
 Open the printed URL (e.g., http://localhost:8501) in your browser.
 
-5) Run tests (optional but recommended)
+5) Run unit tests (optional, recommended)
 pytest -q
 
+🎯 What this project answers
 
-1. What I am Analyzing (Contextual Analysis)
+Goal: help a bank balance speed, security, and operational load when adopting SCT Inst.
 
-The project analyzes the half-yearly payment statistics published by the Deutsche Bundesbank (2022–2024) to understand the German payment market's shift toward instant transactions.
+Hypotheses:
 
-Data Source
+H1 — SCT Inst growth vs paper-based transfers (trend validation).
+Electronic credit transfers (incl. SCT Inst) rise as paper-based decline → market is digitizing.
 
-Focus
+H2 — VoP strictness → Conversion & Latency.
+Stricter payee-name checks reduce mistakes but lower conversion and increase p95 latency.
 
-Analytical Goal
+H3 — Fraud filter threshold → Risk vs Manual load.
+Tighter filters reduce risk exposure but increase manual reviews (ops workload).
 
-Bundesbank Statistics
+H4 — Volumes → Infrastructure load.
+Growing electronic volumes imply higher p95 latency pressure → need for smart tuning.
 
-SCT Inst growth, traditional credit transfers, card and ATM usage.
+How it works:
 
-To validate the urgency of Instant Payments adoption and establish a realistic base-load and risk context for the subsequent simulation phase.
+Descriptive analysis of Bundesbank trends (2022–2024).
 
-2. Key Hypotheses for Testing (Simulator Focus)
+Synthetic simulator for instant payments to test VoP & Fraud thresholds.
 
-My main objective is to build a Readiness Simulator that allows a bank to test different operational parameters against key performance indicators (KPIs). The following hypotheses drive the simulator's logic:
+Interactive Streamlit app to explore trade-offs and pick recommended settings.
 
-H1: SCT Inst Growth and Cannibalization (Trend Validation)
-
-Assertion: The growth in electronic credit transfers (including SCT Inst) correlates with a corresponding decrease in paper-based transfers, indicating a rapid, successful digital transformation.
-
-Purpose: Use data analysis to confirm market behavior and justify the Simulator's necessity.
-
-H2: Verification of Payee (VoP) vs. Conversion and Latency (Simulator KPI)
-
-Assertion: Implementing stricter Verification of Payee (VoP) filters significantly reduces fraud/error, but this comes at a cost of operational efficiency.
-
-Simulator Test: Strict VoP settings will result in a measurable drop in the Conversion Rate of successful transactions and an increase in p95 Latency for transactions requiring enhanced validation or manual routing.
-
-H3: Fraud Filter Stringency vs. Operational Load (Simulator KPI)
-
-Assertion: Increasing the sensitivity of fraud detection rules (lowering the threshold) is a direct trade-off between risk exposure and operational overhead.
-
-Simulator Test: Higher filter stringency reduces the total Risk Exposure (EUR) for the bank, but simultaneously increases the Manual Review Rate (%), stressing the fraud operations team.
-
-H4: Volume Correlation with Infrastructure Load (Contextual KPI)
-
-Assertion: The observed year-over-year increase in overall electronic transaction volumes (e.g., card payments, credit transfers) signals a growing stress on the bank's core payment processing infrastructure.
-
-Simulator Test: The historical transaction growth rate is used as the input load parameter to simulate and monitor critical performance metrics like p95 Latency under growing pressure.
-
-🎯 Executive Summary and Project Goal
-
-The project is focused on analyzing the dynamics of the German payment market and developing a Readiness Simulator for a financial institution. The goal is to help the bank optimize operational parameters (VoP, Fraud Filters, Operating Modes) to achieve the ideal balance between Security, Speed, and Operational Load in the era of instant payments.
-
-1. 📊 Subject and Contextual Analysis
-
-We analyze the semi-annual payment statistics from the Deutsche Bundesbank for 2022–2024 to identify key market trends.
-
-Data Source
-
-Focus Analysis
-
-Analytical Task
-
-Bundesbank Statistics
-
-SCT Inst growth, traditional transfers, card and ATM/POS usage.
-
-Confirm the relevance of SCT Inst implementation and establish a realistic context of load and risk for the Simulator.
-
-2. 🧪 Key Hypotheses for Simulation
-
-A total of four hypotheses are formulated. The first is validated through data analysis, and the remaining three are tested by running the Simulator with various input parameters.
-
-H1: SCT Inst Growth and Cannibalization (Trend Validation)
-
-Assertion: The increase in the share of electronic transfers (including SCT Inst) correlates with a decrease in the number of paper-based transfers, signaling a rapid digital transformation of the market.
-
-Project Link: Justification for the necessity of the Simulator.
-
-H2: Verification of Payee (VoP) vs. Conversion and Latency (KPI: Speed)
-
-Assertion: Implementing a strict VoP filter reduces errors but can negatively impact efficiency.
-
-Simulator Test: Strict VoP settings will lead to a drop in the Conversion Rate of successful transactions and an increase in p95 Latency for transfers requiring manual review.
-
-H3: Fraud Filter Stringency vs. Operational Load (KPI: Risk vs. Operations)
-
-Assertion: Increasing the stringency of fraud filters represents a direct compromise between risk and operational load.
-
-Simulator Test: Higher filter stringency reduces the overall Monetary Fraud Risk (Risk Exposure, EUR), but simultaneously increases the Manual Review Rate (%).
-
-H4: Volume Correlation with Infrastructure Load (KPI: Scalability)
-
-Assertion: The general growth of electronic transactions (credit transfers, cards) in the country signals an increasing load on the bank's payment infrastructure.
-
-Simulator Test: Historical volume growth is used as the input load parameter to monitor the critical p95 Latency under growing pressure.
-
-📁 Project Structure
-project/
+🧭 Project Structure
+project-root/
+├── app/
+│   └── streamlit_app.py                # Interactive Streamlit dashboard
+├── src/
+│   └── sim_core.py                     # Simulation logic (VoP/Fraud & scans)
 ├── data/
-│   ├── raw/              # original Bundesbank Excel data
-│   ├── interim/          # intermediate cleaned tables
-│   └── processed/        # final tidy-format datasets for analysis
+│   ├── raw/                            # Original Bundesbank Excel/PDF
+│   ├── interim/                        # Cleaned but not yet tidy
+│   └── processed/                      # Tidy CSVs for analysis
 ├── notebooks/
-│   ├── 01_data_extraction_cleaning.ipynb   # extracts tables from Excel
-│   ├── 02_data_transform_tidy.ipynb        # cleaning and transformation
-│   └── 03_data_exploration.ipynb           # data exploration and visualization (next step)
+│   ├── 01_data_extraction_cleaning.ipynb
+│   ├── 02_data_transform_tidy.ipynb
+│   ├── 03_exploratory_data_analysis.ipynb
+│   ├── 04_hypothesis_validation.ipynb
+│   └── 05_simulation_experiments.ipynb
+├── tests/
+│   └── test_sim_core.py                # Unit tests for simulator core
+├── requirements.txt
 └── README.md
 
-⚙️ Workflow Overview
-🧩 Step 1 — Data Extraction & Cleaning
+🔬 Workflow Overview
+🧩 Step 1 — Data extraction & cleaning
 
-Open 01_data_extraction_cleaning.ipynb
+Load Bundesbank Excel (I.Payments_statistics_810262.xlsx).
 
-Load the Bundesbank Excel file (I.Payments_statistics_810262.xlsx)
+Extract Table 3a/3b (transactions / values).
 
-Read sheets table_3 (transactions) and table_4 (values)
+Save cleaned CSVs to data/interim/.
 
-Save clean CSV files to data/interim/
+🧩 Step 2 — Tidy transformation
 
-🧩 Step 2 — Data Transformation (Tidy Format)
+Remove helper rows (e.g., “of which”).
 
-Open 02_data_transform_tidy.ipynb
+Standardize columns (2022 S1→2022H1, etc.).
 
-Remove helper rows ("of which", "Total")
+Convert to long (tidy) format with melt().
 
-Standardize column names (2022 S1, 2022 S2 → 2022H1, 2022H2)
+Save tidy CSVs to data/processed/.
 
-Transform wide-format tables into tidy format using melt()
+🧩 Step 3 — Exploratory analysis
 
-Save tidy datasets to data/processed/
+Descriptive stats (mean, median, quartiles).
 
-🧩 Step 3 — Data Exploration & Visualization
+Visualize SCT Inst vs paper-based, domestic totals, volume trends.
 
-Open 03_data_exploration.ipynb
+Context for simulator inputs.
 
-Analyze SCT Inst growth and the decline of paper-based transfers
+🧩 Step 4 — Hypothesis validation & simulation
 
-Compare electronic vs. traditional credit transfers
+Generate synthetic instant payments (amount, fraud probability, VoP score).
 
-Produce first visualizations (line charts and trends)
-(next stage to be implemented)
+Functions in src/sim_core.py:
 
-🧩 Version Control Workflow (Git)
+simulate_vop / scan_vop → Conversion & Latency p95 vs VoP threshold.
 
-Below is the basic command sequence used in this project to track changes and keep the repository up to date:
+simulate_fraud / scan_fraud → Manual Review Rate & Risk Exposure vs fraud threshold.
 
-# 1️⃣ Check project status (see modified and untracked files)
+Consolidate findings (balanced operating zone).
+
+🧩 Step 5 — Interactive app
+
+app/streamlit_app.py shows KPIs, curves, explanations, and CSV exports.
+
+Live tuning of thresholds to see trade-offs.
+
+📸 App Highlights (what to look for)
+
+📈 KPI Snapshot: Conversion, Latency p95, Manual Review Rate, Risk Exposure — for current settings.
+
+🔍 Sensitivity Curves:
+
+VoP strictness → Conversion & Latency.
+
+Fraud threshold → Manual load & Risk exposure (dual-axis chart).
+
+🧩 Interpretation panel: short “so-what” explaining trade-offs and a rule-of-thumb balance.
+
+Rule-of-thumb zone: VoP ≈ 0.75–0.85, Fraud ≈ 0.40–0.55
+keeps Conversion healthy, Latency under control, and Risk acceptable without overwhelming analysts.
+
+✅ Testing
+
+tests/test_sim_core.py covers:
+
+Synthetic generator shape/columns/ranges.
+
+Output schema & ranges for simulate_vop / simulate_fraud.
+
+Shapes/columns for scan_vop / scan_fraud.
+
+Run:
+
+pytest -q
+
+🩹 Troubleshooting
+
+ModuleNotFoundError: No module named 'src'
+
+Run Streamlit from project root:
+streamlit run app/streamlit_app.py
+
+We also add the root to sys.path at the top of streamlit_app.py:
+
+import sys, os
+sys.path.append(os.path.abspath(".."))
+
+
+Cache issues
+
+streamlit cache clear
+
+🧠 Why this project is relevant for a Data Analyst role
+
+Business framing: shows a real trade-off (speed vs security vs ops load).
+
+Data craft: tidy transformations, descriptive stats, trend validation.
+
+Modeling: scenario simulation with clear, decision-ready KPIs.
+
+Communication: interactive dashboard + concise narrative + tests.
+
+🗺️ Roadmap (nice-to-have)
+
+Add Plotly interactivity & tooltips.
+
+Connect historical volumes as load inputs to scale latency scenarios.
+
+Sensitivity heatmap (VoP × Fraud) to visualize global optima.
+
+Export current KPIs as a one-click CSV/PNG.
+
+📝 License & Attribution
+
+Data © Deutsche Bundesbank — used for analytical/educational purposes.
+
+Simulator code © You (MIT suggested).
+
+🤝 Contact
+
+Author: Your Name — Data Analyst
+
+LinkedIn / Email: add your links here
+
+Version Control (example)
 git status
-
-# 2️⃣ Add all new and modified files to the staging area
 git add .
-
-# 3️⃣ Commit your changes with a clear, descriptive message
-git commit -m "Stage 1: Data extraction and cleaning completed (Bundesbank payments)"
-
-# 4️⃣ Push commits to the remote GitHub repository
+git commit -m "Stage 1: Data extraction & cleaning (Bundesbank payments)"
 git push
