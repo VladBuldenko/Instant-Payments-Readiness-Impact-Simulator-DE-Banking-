@@ -27,19 +27,19 @@ cd Instant-Payments-Readiness-Impact-Simulator-DE-Banking-
 
 2) Create & activate a virtual environment
 python -m venv venv
-# macOS / Linux
+macOS / Linux
+
 source venv/bin/activate
-# Windows (PowerShell)
-# .\venv\Scripts\Activate.ps1
+ Windows (PowerShell)
+ .\venv\Scripts\Activate.ps1
 
 3) Install dependencies
 pip install -r requirements.txt
-# (If needed) pip install streamlit
+(If needed) pip install streamlit
 
 4) Run the simulator app
-# IMPORTANT: run from the project root (not from /app)
+IMPORTANT: run from the project root (not from /app)
 streamlit run app/streamlit_app.py
-
 
 Open the printed URL (e.g., http://localhost:8501) in your browser.
 
@@ -179,22 +179,12 @@ We also add the root to sys.path at the top of streamlit_app.py:
 import sys, os
 sys.path.append(os.path.abspath(".."))
 
-
 Cache issues
 
 streamlit cache clear
 
-🧠 Why this project is relevant for a Data Analyst role
 
-Business framing: shows a real trade-off (speed vs security vs ops load).
-
-Data craft: tidy transformations, descriptive stats, trend validation.
-
-Modeling: scenario simulation with clear, decision-ready KPIs.
-
-Communication: interactive dashboard + concise narrative + tests.
-
-🗺️ Roadmap (nice-to-have)
+🗺️ Roadmap
 
 Add Plotly interactivity & tooltips.
 
@@ -212,11 +202,13 @@ Simulator code © You (MIT suggested).
 
 🤝 Contact
 
-Author: Your Name — Data Analyst
+Author: Vladyslav Buldenko — Data Analyst
 
-LinkedIn / Email: add your links here
+LinkedIn: 
+Email: vlad.buldenko.96@gmail.com
 
 Version Control (example)
+
 git status
 git add .
 git commit -m "Stage 1: Data extraction & cleaning (Bundesbank payments)"
